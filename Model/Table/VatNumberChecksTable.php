@@ -1,6 +1,9 @@
 <?php
-App::uses('VatNumberCheckAppModel', 'VatNumberCheck.Model');
-App::uses('HttpSocket', 'Network/Http');
+namespace App\Model\Table;
+
+use App\Network\Http\HttpSocket;
+use Cake\Core\Configure;
+use VatNumberCheck\Model\VatNumberCheckAppModel;
 
 /**
  * VatNumberCheck Model
@@ -76,7 +79,7 @@ class VatNumberCheck extends VatNumberCheckAppModel {
  */
 	public function getUrlContent($url) {
 		$config = (array)Configure::read('VatNumberCheck.socketConfig');
-		$HttpSocket = new HttpSocket($config);
+		$HttpSocket = new Client($config);
 
 		try {
 			$response = $HttpSocket->get($url);

@@ -1,5 +1,7 @@
 <?php
-App::uses('VatNumberChecksAppController', 'VatNumberCheck.Controller');
+namespace App\Controller;
+
+use VatNumberCheck\Controller\VatNumberChecksAppController;
 
 /**
  * VatNumberChecks Controller
@@ -20,8 +22,8 @@ class VatNumberChecksController extends VatNumberChecksAppController {
  *
  * @return void
  */
-	public function beforeFilter() {
-		parent::beforeFilter();
+	public function beforeFilter(Event $event) {
+		parent::beforeFilter($event);
 
 		if (in_array($this->request->action, ['check'], true)) {
 			// Disable Security component checks
@@ -43,11 +45,11 @@ class VatNumberChecksController extends VatNumberChecksAppController {
  */
 	public function check() {
 		$vatNumber = $this->request->data('vatNumber');
-		$vatNumber = $this->VatNumberCheck->normalize($vatNumber);
+		$vatNumber = $this->VatNumberChecks->normalize($vatNumber);
 
 		$jsonData = array_merge(compact('vatNumber'), ['status' => 'failure']);
 		try {
-			$vatNumberValid = $this->VatNumberCheck->check($vatNumber);
+			$vatNumberValid = $this->VatNumberChecks->check($vatNumber);
 			if ($vatNumberValid) {
 				$jsonData = array_merge(compact('vatNumber'), ['status' => 'ok']);
 			}

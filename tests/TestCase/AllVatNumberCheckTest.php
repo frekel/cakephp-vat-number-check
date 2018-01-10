@@ -2,7 +2,12 @@
 /**
  * All VatNumberCheck plugin tests
  */
-class AllVatNumberCheckTest extends CakeTestCase {
+namespace App\Test\Case;
+
+use Cake\Core\Plugin;
+use Cake\TestSuite\TestCase;
+
+class AllVatNumberCheckTest extends TestCase {
 
 /**
  * Suite define the tests for this plugin
@@ -12,7 +17,7 @@ class AllVatNumberCheckTest extends CakeTestCase {
 	public static function suite() {
 		$suite = new CakeTestSuite('All VatNumberCheck test');
 
-		$path = CakePlugin::path('VatNumberCheck') . 'Test' . DS . 'Case' . DS;
+		$path = Plugin::path('VatNumberCheck') . 'Test' . DS . 'Case' . DS;
 		$suite->addTestDirectoryRecursive($path);
 
 		return $suite;

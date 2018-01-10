@@ -1,19 +1,24 @@
 <?php
-App::uses('VatNumberCheck', 'VatNumberCheck.Model');
+namespace App\Test\Case\Model\Table;
+
+use Cake\TestSuite\TestCase;
+use VatNumberCheck\Model\VatNumberCheck;
 
 /**
  * VatNumberCheck Test Case
  *
  * @property VatNumberCheck.VatNumberCheck $VatNumberCheck
  */
-class VatNumberCheckTest extends CakeTestCase {
+class VatNumberChecksTableTest extends TestCase {
 
 /**
  * Fixtures
  *
  * @var array
  */
-	public $fixtures = [];
+	public $fixtures = [
+		
+	];
 
 /**
  * setUp method
@@ -23,7 +28,7 @@ class VatNumberCheckTest extends CakeTestCase {
 	public function setUp() {
 		parent::setUp();
 
-		$this->VatNumberCheck = ClassRegistry::init('VatNumberCheck.VatNumberCheck');
+		$this->VatNumberCheck = TableRegistry::get('VatNumberCheck.VatNumberCheck');
 	}
 
 /**

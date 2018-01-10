@@ -1,19 +1,23 @@
 <?php
-App::uses('VatNumberChecksController', 'VatNumberCheck.Controller');
+namespace App\Test\Case\Controller;
+
+use VatNumberCheck\Controller\VatNumberChecksController;
 
 /**
  * VatNumberChecksController Test Case
  *
  * @property VatNumberCheck.VatNumberChecksController $VatNumberChecks
  */
-class VatNumberChecksControllerTest extends ControllerTestCase {
+class VatNumberChecksControllerTest extends IntegrationTestCase {
 
 /**
  * Fixtures
  *
  * @var array
  */
-	public $fixtures = [];
+	public $fixtures = [
+		
+	];
 
 /**
  * testCheck method
@@ -24,11 +28,11 @@ class VatNumberChecksControllerTest extends ControllerTestCase {
 		// Post request, correct vat
 
 		$VatNumberChecks = $this->generate('VatNumberCheck.VatNumberChecks');
-		$VatNumberChecks->VatNumberCheck = ClassRegistry::init('VatNumberCheck.VatNumberCheck');
+		$VatNumberChecks->VatNumberCheck = TableRegistry::get('VatNumberCheck.VatNumberCheck');
 
 		$data = ['vatNumber' => 'NL820345672B01'];
 
-		$result = $this->testAction(
+		$result = $this->get(
 			'/vat_number_check/vat_number_checks/check.json',
 			['return' => 'contents', 'data' => $data, 'method' => 'post']
 		);
@@ -46,11 +50,11 @@ class VatNumberChecksControllerTest extends ControllerTestCase {
 		// Get request
 
 		$VatNumberChecks = $this->generate('VatNumberCheck.VatNumberChecks');
-		$VatNumberChecks->VatNumberCheck = ClassRegistry::init('VatNumberCheck.VatNumberCheck');
+		$VatNumberChecks->VatNumberCheck = TableRegistry::get('VatNumberCheck.VatNumberCheck');
 
 		$data = ['vatNumber' => ''];
 
-		$result = $this->testAction(
+		$result = $this->get(
 			'/vat_number_check/vat_number_checks/check.json',
 			['return' => 'contents']
 		);
@@ -61,11 +65,11 @@ class VatNumberChecksControllerTest extends ControllerTestCase {
 		// Post request, incorrect vat
 
 		$VatNumberChecks = $this->generate('VatNumberCheck.VatNumberChecks');
-		$VatNumberChecks->VatNumberCheck = ClassRegistry::init('VatNumberCheck.VatNumberCheck');
+		$VatNumberChecks->VatNumberCheck = TableRegistry::get('VatNumberCheck.VatNumberCheck');
 
 		$data = ['vatNumber' => 'NL820345672B02'];
 
-		$result = $this->testAction(
+		$result = $this->get(
 			'/vat_number_check/vat_number_checks/check.json',
 			['return' => 'contents', 'data' => $data, 'method' => 'post']
 		);
@@ -84,7 +88,7 @@ class VatNumberChecksControllerTest extends ControllerTestCase {
 
 		$data = ['vatNumber' => 'NL820345672B01'];
 
-		$result = $this->testAction(
+		$result = $this->get(
 			'/vat_number_check/vat_number_checks/check.json',
 			['return' => 'contents', 'data' => $data, 'method' => 'post']
 		);

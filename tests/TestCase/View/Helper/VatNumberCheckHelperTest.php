@@ -1,14 +1,17 @@
 <?php
-App::uses('View', 'View');
-App::uses('Helper', 'View');
-App::uses('VatNumberCheckHelper', 'VatNumberCheck.View/Helper');
+namespace App\Test\Case\View\Helper;
+
+use Cake\TestSuite\TestCase;
+use Cake\View\Helper;
+use Cake\View\View;
+use VatNumberCheck\View\Helper\VatNumberCheckHelper;
 
 /**
  * VatNumberCheckHelper Test Case
  *
  * @property VatNumberCheck.VatNumberCheckHelper $VatNumberCheck
  */
-class VatNumberCheckHelperTest extends CakeTestCase {
+class VatNumberCheckHelperTest extends TestCase {
 
 /**
  * setUp method

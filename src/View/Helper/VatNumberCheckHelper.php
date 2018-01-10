@@ -1,7 +1,9 @@
 <?php
-App::uses('AppHelper', 'View/Helper');
-App::uses('HtmlHelper', 'View/Helper');
-App::uses('FormHelper', 'View/Helper');
+namespace App\View\Helper;
+
+use App\View\Helper\AppHelper;
+use App\View\Helper\FormHelper;
+use App\View\Helper\HtmlHelper;
 
 /**
  * VatNumberCheck Helper
@@ -65,13 +67,13 @@ class VatNumberCheckHelper extends AppHelper {
  * @return void
  */
 	protected function _addJs() {
-		$checkUrl = $this->Html->url([
-			'plugin' => 'vat_number_check', 'controller' => 'vat_number_checks', 'action' => 'check', 'ext' => 'json'
+		$checkUrl = $this->Url->build([
+			'plugin' => 'vat_number_check', 'controller' => 'VatNumberChecks', 'action' => 'check', 'ext' => 'json'
 		]);
 		$checkImages = [
-			'ok' => $this->Html->url('/vat_number_check/img/ok.png'),
-			'failure' => $this->Html->url('/vat_number_check/img/failure.png'),
-			'serviceUnavailable' => $this->Html->url('/vat_number_check/img/service-unavailable.png'),
+			'ok' => $this->Url->build('/vat_number_check/img/ok.png'),
+			'failure' => $this->Url->build('/vat_number_check/img/failure.png'),
+			'serviceUnavailable' => $this->Url->build('/vat_number_check/img/service-unavailable.png'),
 		];
 
 		$script = "
