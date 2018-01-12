@@ -1,15 +1,12 @@
 <?php
-namespace App\Model\Table;
+namespace VatNumberChecker\Model\Table;
 
-use App\Network\Http\HttpSocket;
-use Cake\Core\Configure;
-use VatNumberCheck\Model\VatNumberCheckAppModel;
+use Cake\ORM\Query;
+use Cake\ORM\Table;
 
-/**
- * VatNumberCheck Model
- *
- */
-class VatNumberCheck extends VatNumberCheckAppModel {
+class VatNumberChecksTable extends Table
+{
+
 
 /**
  * Use table.
@@ -31,6 +28,17 @@ class VatNumberCheck extends VatNumberCheckAppModel {
  */
 	const CHECK_URL = 'http://ec.europa.eu/taxation_customs/vies/viesquer.do';
 
+    public function initialize(array $config)
+    {
+        parent::initialize($config);
+
+        $this->setTable('users');
+        $this->setDisplayField('id');
+        $this->setPrimaryKey('id');
+
+        $this->addBehavior('Timestamp');
+
+    }
 /**
  * Normalizes a VAT number.
  *

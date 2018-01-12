@@ -1,14 +1,16 @@
 <?php
-namespace App\Controller;
+namespace VatNumberCheck\Controller;
 
-use VatNumberCheck\Controller\VatNumberChecksAppController;
+use VatNumberCheck\Controller\AppController;
+
+use Cake\Event\Event;
 
 /**
  * VatNumberChecks Controller
  *
  * @property VatNumberCheck.VatNumberCheck $VatNumberCheck
  */
-class VatNumberChecksController extends VatNumberChecksAppController {
+class VatNumberChecksController extends AppController {
 
 /**
  * An array of names of components to load.
@@ -27,15 +29,18 @@ class VatNumberChecksController extends VatNumberChecksAppController {
 
 		if (in_array($this->request->action, ['check'], true)) {
 			// Disable Security component checks
-			if ($this->Components->enabled('Security')) {
-				$this->Components->disable('Security');
+			if ($this->components()->has('Security')) {
+				$this->components()->unload('Security');
 			}
 
 			// Allow action without authentication
-			if ($this->Components->enabled('Auth')) {
+			if ($this->components()->has('Auth')) {
 				$this->Auth->allow($this->request->action);
 			}
+
 		}
+
+
 	}
 
 /**
@@ -45,6 +50,9 @@ class VatNumberChecksController extends VatNumberChecksAppController {
  */
 	public function check() {
 		$vatNumber = $this->request->data('vatNumber');
+		debug($this->VatNumberCheck);
+		debug($this->VatNumberChecks);
+		die();
 		$vatNumber = $this->VatNumberChecks->normalize($vatNumber);
 
 		$jsonData = array_merge(compact('vatNumber'), ['status' => 'failure']);
